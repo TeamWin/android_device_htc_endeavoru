@@ -4,8 +4,15 @@ USE_CAMERA_STUB := true
 -include vendor/htc/endeavoru/BoardConfigVendor.mk
 
 TARGET_NO_BOOTLOADER := true
-TARGET_BOARD_PLATFORM := unknown
-TARGET_CPU_ABI := armeabi
+TARGET_BOARD_PLATFORM := tegra
+TARGET_CPU_ABI := armeabi-v7a
+TARGET_CPU_ABI2 := armeabi
+TARGET_ARCH_VARIANT := armv7-a-neon
+TARGET_ARCH_VARIANT_CPU := cortex-a9
+TARGET_ARCH_VARIANT_FPU := vfpv3-d16
+TARGET_CPU_SMP := true
+ARCH_ARM_HAVE_TLS_REGISTER := true
+
 TARGET_BOOTLOADER_BOARD_NAME := endeavoru
 
 BOARD_KERNEL_CMDLINE := 
@@ -19,8 +26,19 @@ BOARD_SYSTEMIMAGE_PARTITION_SIZE := 0x105c0000
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 0x105c0000
 BOARD_FLASH_BLOCK_SIZE := 131072
 
-TARGET_PREBUILT_KERNEL := device/htc/endeavoru/kernel
+TARGET_PREBUILT_KERNEL := device/htc/endeavoru/kernAl
+
+TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/fsl-tegra-udc/gadget/lun0/file
+
+# Recovery Start
+
+TARGET_PREBUILT_RECOVERY_KERNEL := device/htc/endeavoru/recovery-kernAl
 
 BOARD_HAS_NO_SELECT_BUTTON := true
 # Use this flag if the board has a ext4 partition larger than 2gb
 #BOARD_HAS_LARGE_FILESYSTEM := true
+
+# TWRP Configurations
+DEVICE_RESOLUTION := 720x1280
+BOARD_HAS_NO_REAL_SDCARD := true
+TARGET_RECOVERY_INITRC := device/htc/endeavoru/recovery/init.twrp.rc

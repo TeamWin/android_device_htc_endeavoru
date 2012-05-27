@@ -1,5 +1,6 @@
 ## recovery and custom charging
 PRODUCT_COPY_FILES += \
+    device/htc/endeavoru/recovery/sbin/postrecoveryboot.sh:recovery/root/sbin/postrecoveryboot.sh \
     device/htc/endeavoru/recovery/sbin/choice_fn:recovery/root/sbin/choice_fn \
     device/htc/endeavoru/recovery/init:recovery/root/init \
     device/htc/endeavoru/recovery/sbin/offmode_charging:recovery/root/sbin/offmode_charging \
@@ -18,7 +19,7 @@ DEVICE_PACKAGE_OVERLAYS += device/htc/endeavoru/overlay
 
 
 ifeq ($(TARGET_PREBUILT_KERNEL),)
-	LOCAL_KERNEL := device/htc/endeavoru/kernel
+	LOCAL_KERNEL := device/htc/endeavoru/kernAl
 else
 	LOCAL_KERNEL := $(TARGET_PREBUILT_KERNEL)
 endif

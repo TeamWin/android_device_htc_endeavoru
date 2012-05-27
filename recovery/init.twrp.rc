@@ -64,6 +64,7 @@ service detect_key /sbin/detect_key
     oneshot
 
 # Always start adbd on userdebug and eng builds
+on property:ro.debuggable=1
     write /sys/class/android_usb/android0/enable 0
     write /sys/class/android_usb/android0/idVendor 18D1
     write /sys/class/android_usb/android0/idProduct D001
@@ -72,7 +73,8 @@ service detect_key /sbin/detect_key
     write /sys/class/android_usb/android0/iManufacturer $ro.product.manufacturer
     write /sys/class/android_usb/android0/iProduct $ro.product.model
     write /sys/class/android_usb/android0/iSerial $ro.serialno
-    start adbd
+    #start adbd
+    setprop service.adb.root 1
 
 # Restart adbd so it can run as root
 on property:service.adb.root=1

@@ -42,3 +42,4 @@ BOARD_HAS_NO_SELECT_BUTTON := true
 DEVICE_RESOLUTION := 720x1280
 BOARD_HAS_NO_REAL_SDCARD := true
 TARGET_RECOVERY_INITRC := device/htc/endeavoru/recovery/init.twrp.rc
+TW_FLASH_FROM_STORAGE := true

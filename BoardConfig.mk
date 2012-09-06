@@ -28,7 +28,7 @@ BOARD_FLASH_BLOCK_SIZE := 131072
 
 TARGET_PREBUILT_KERNEL := device/htc/endeavoru/kernAl
 
-TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/fsl-tegra-udc/gadget/lun
+TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/fsl-tegra-udc/gadget/lun%d/file
 
 # Recovery Start
 
@@ -43,3 +43,10 @@ DEVICE_RESOLUTION := 720x1280
 BOARD_HAS_NO_REAL_SDCARD := true
 TARGET_RECOVERY_INITRC := device/htc/endeavoru/recovery/init.twrp.rc
 TW_FLASH_FROM_STORAGE := true
+TW_INCLUDE_CRYPTO := true
+TW_CRYPTO_FS_TYPE := "ext4"
+TW_CRYPTO_REAL_BLKDEV := "/dev/block/mmcblk0p15"
+TW_CRYPTO_MNT_POINT := "/data"
+TW_CRYPTO_FS_OPTIONS := "barrier=0"
+TW_CRYPTO_FS_FLAGS := "0x00000406"
+TW_CRYPTO_KEY_LOC := "footer"

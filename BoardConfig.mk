@@ -139,17 +139,3 @@ TARGET_RECOVERY_DEVICE_MODULES += chargeled
 # Releasetools
 TARGET_RELEASETOOLS_EXTENSIONS := device/htc/endeavoru
 
-# Device specific SELinux policies
-BOARD_SEPOLICY_DIRS += \
-    device/htc/endeavoru/sepolicy
-
-BOARD_SEPOLICY_UNION += \
-	file_contexts \
-	akmd.te \
-	init_shell.te \
-	kernel.te \
-	navl_server.te \
-	recovery.te \
-	uim_sysfs.te \
-	system_server.te \
-	vold.te \

@@ -14,6 +14,18 @@ $(call inherit-product, vendor/cm/config/nfc_enhanced.mk)
 # Inherit device configuration
 $(call inherit-product, device/htc/endeavoru/full_endeavoru.mk)
 
+# CM Snap camera
+PRODUCT_PACKAGES += Snap
+
+# Extra tools in CM
+PRODUCT_PACKAGES += \
+    bash \
+    bzip2 \
+    curl \
+    unrar \
+    unzip \
+    zip
+
 ## Device identifier. This must come after all inclusions
 PRODUCT_DEVICE := endeavoru
 PRODUCT_NAME := cm_endeavoru

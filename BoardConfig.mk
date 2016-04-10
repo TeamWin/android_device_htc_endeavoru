@@ -24,10 +24,17 @@
 -include device/htc/tegra3-common/BoardConfigCommon.mk
 
 # Boot/Recovery image settings
-BOARD_KERNEL_CMDLINE :=
+BOARD_KERNEL_CMDLINE := androidboot.selinux=permissive
 BOARD_KERNEL_PAGESIZE := 2048
 
 TARGET_USERIMAGES_USE_EXT4 := true
+
+# Skip droiddoc build to save build time
+BOARD_SKIP_ANDROID_DOC_BUILD := true
+DISABLE_DROIDDOC := true
+
+#Stop some stupid logging
+COMMON_GLOBAL_CFLAGS += -DSTOP_LOG_SPAM
 
 # Partitions Info
 #cat /proc/emmc
@@ -72,6 +79,14 @@ COMMON_GLOBAL_CFLAGS             += -DUSES_TI_MAC80211
 # Kernel
 TARGET_KERNEL_SOURCE := kernel/htc/endeavoru
 TARGET_KERNEL_CONFIG := cyanogenmod_endeavoru_defconfig
+
+
+# Marshmallow
+TARGET_NEEDS_TEXT_RELOCS_SUPPORT := true
+COMMON_GLOBAL_CFLAGS += -DDISABLE_ASHMEM_TRACKING
+
+# Enable Minikin text layout engine (will be the default soon)
+USE_MINIKIN := true
 
 # Building wifi modules
 TARGET_MODULES_SOURCE := "kernel/htc/endeavoru/drivers/net/wireless/compat-wireless_R5.SP2.03"

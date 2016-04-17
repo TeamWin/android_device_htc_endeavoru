@@ -30,3 +30,17 @@ PRODUCT_NAME := full_endeavoru
 PRODUCT_DEVICE := endeavoru
 PRODUCT_BRAND := Android
 PRODUCT_MODEL := Full AOSP on EndeavorU
+ #help GL, ril and camera work in M
+PRODUCT_PACKAGES += \
+    libdgv1 \
+    libEGL_tegra \
+    libEGL_tegra_impl \
+    libGLESv1_CM_tegra \
+    libGLESv2_tegra \
+    libx3_ril \
+    libx3_misc_cpp \
+    libx3_cam \
+    libboringssl-compat
+
+# Libstlport needed by lib/libnvcap.so
+PRODUCT_PACKAGES += libstlpor

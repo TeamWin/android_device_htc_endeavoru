@@ -1,3 +1,12 @@
 # Allow loading modules from shell scripts started by init.
 # Needed by the wifi-calibration.sh script.
 allow init_shell self:capability sys_module;
+
+allow init sysfs:file write;
+
+allow init sysfs_firmware_writable:file write;
+
+allow init sysfs_devices_tegradc:lnk_file { read };
+
+# Reboot to Recovery
+allow init misc_block_device:blk_file rw_file_perms;

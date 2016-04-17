@@ -5,7 +5,7 @@ recovery_only(`
   allow recovery self:netlink_kobject_uevent_socket create_socket_perms;
 
   allow recovery device:dir rw_dir_perms;
-  allow recovery self:capability mknod;
+ # allow recovery self:capability mknod;
 
-  allow recovery device:chr_file create_file_perms;
+# allow recovery device:chr_file create_file_perms;
 ')

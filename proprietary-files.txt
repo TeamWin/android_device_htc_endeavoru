@@ -81,7 +81,7 @@ lib/libnvodm_query.so
 lib/libnvomxadaptor.so
 lib/libnvomxilclient.so
 lib/libnvomx.so
-
+lib/libnvos.so
 lib/libnvparser.so
 lib/libnvrm_graphics.so
 lib/libnvrm.so
@@ -231,11 +231,12 @@ lib/libinvensense_hal.so
 lib/libewtzmu2cali.so
 
 #EGL
-
-
+lib/egl/libEGL_tegra_impl.so
 lib/egl/libGLESv1_CM_tegra_impl.so
-
+lib/egl/libEGL_tegra.so
 lib/egl/libGLESv2_tegra_impl.so
+lib/egl/libGLESv1_CM_tegra.so
+lib/egl/libGLESv2_tegra.so
 
 # They just cause logspam
 #lib/egl/libEGL_perfhud.so

@@ -197,6 +197,10 @@
     <!-- Set to true to add links to Cell Broadcast app from Settings and MMS app. -->
     <bool name="config_cellBroadcastAppLinks">false</bool>
 
+<!-- Older rotation sensors are not setting event.timestamp correctly. Setting to   
+true will use SystemClock.elapsedRealtimeNanos() to set timestamp. -->
+   <bool name="config_useSystemClockforRotationSensor">true</bool>
+
     <!-- Enables or disables fading edges when marquee is enabled in TextView. -->
     <bool name="config_ui_enableFadingMarquee">true</bool>
 

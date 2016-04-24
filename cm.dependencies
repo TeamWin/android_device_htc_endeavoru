@@ -7,4 +7,10 @@
    "repository": "android_kernel_htc_endeavoru",
    "target_path": "kernel/htc/endeavoru"
  }
+   {
+    "remote": "github",
+    "repository": "CyanogenMod/android_external_stlport",
+    "target_path": "external/stlport",
+    "revision": "cm-13.0"
+  }
 ]

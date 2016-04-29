@@ -28,5 +28,5 @@
     <bool name="config_recents_fake_shadows">true</bool>
 
     <!-- Use hardware layers in recents -->
-    <bool name="config_recents_use_hardware_layers">true</bool>
+    <bool name="config_recents_use_hardware_layers">false</bool>
 </resources>

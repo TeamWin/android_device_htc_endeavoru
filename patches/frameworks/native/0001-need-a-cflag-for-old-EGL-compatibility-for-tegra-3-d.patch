@@ -1,0 +1,104 @@
+From 72e96f0c97925ea8441a56ba9a8bd7905477799c Mon Sep 17 00:00:00 2001
+From: alfsamsung <alfsamsung@hotmail.com>
+Date: Sun, 21 Dec 2014 01:12:03 +0100
+Subject: [PATCH] need a cflag for "old" EGL compatibility for tegra 3 device.
+
+Michael Bestas originally worked on this here:
+    http://review.cyanogenmod.org/#/c/54257/
+
+    Here is Michael's description:
+
+    From 4.1 to 4.2, the display subsystem was reworked to
+    use SurfaceTextureClient/BufferQueue instead of
+    FramebufferNativeWindow for the framebuffer itself.
+
+    Unfortunately, some legacy EGL libraries make assumptions
+    that any framebuffer device will be FramebufferNativeWindow.
+
+    These EGL libraries will fail when used in 4.2 as if the
+    framebuffer is not FramebufferNativeWindow, they will
+    try to dequeue more than one buffer at a time, which
+    will cause a hang of the graphics subsystem.
+
+    This allows use of FramebufferNativeWindow to keep
+    legacy EGL implementations happy.  Confirmed EGL
+    implementations that need this include but are
+    not limited to:
+
+    Set BOARD_EGL_NEEDS_FNW to use
+
+    Tegra2/3 ICS EGL
+    Mali400 ICS EGL (Allwinner A10)
+    Mali400 Jellybean (4.1) EGL (Samsung Exynos4)
+    Adreno Jellybean (4.1) EGL (legacy qcom devices using PMEM)
+
+    Original implementation by OndraOrg of XDA:
+    http://forum.xda-developers.com/showpost.php?p=34469675&postcount=19
+
+    Change-Id: I78dd6479e2cb2370efceb6840b2063808bc885f0
+    Signed-off-by: Taylor Wagner <taylor.m.wagner@gmail.com>
+
+Signed-off-by: alfsamsung <alfsamsung@hotmail.com>
+---
+ include/ui/FramebufferNativeWindow.h      | 2 +-
+ services/surfaceflinger/Android.mk        | 4 ++++
+ services/surfaceflinger/DisplayDevice.cpp | 8 ++++++++
+ 3 files changed, 13 insertions(+), 1 deletion(-)
+
+diff --git a/include/ui/FramebufferNativeWindow.h b/include/ui/FramebufferNativeWindow.h
+index 6b66d5f..2eb1cc1 100644
+--- a/include/ui/FramebufferNativeWindow.h
++++ b/include/ui/FramebufferNativeWindow.h
+@@ -15,7 +15,7 @@
+  */
+ 
+ #ifndef INCLUDED_FROM_FRAMEBUFFER_NATIVE_WINDOW_CPP
+-#warning "FramebufferNativeWindow is deprecated"
++//#warning "FramebufferNativeWindow is deprecated"
+ #endif
+ 
+ #ifndef ANDROID_FRAMEBUFFER_NATIVE_WINDOW_H
+diff --git a/services/surfaceflinger/Android.mk b/services/surfaceflinger/Android.mk
+index c2b74ed..4a17413 100644
+--- a/services/surfaceflinger/Android.mk
++++ b/services/surfaceflinger/Android.mk
+@@ -56,6 +56,10 @@ ifeq ($(TARGET_FORCE_HWC_FOR_VIRTUAL_DISPLAYS),true)
+     LOCAL_CFLAGS += -DFORCE_HWC_COPY_FOR_VIRTUAL_DISPLAYS
+ endif
+ 
++ifeq ($(BOARD_EGL_NEEDS_FNW),true)
++	LOCAL_CFLAGS += -DEGL_NEEDS_FNW
++endif
++
+ ifneq ($(NUM_FRAMEBUFFER_SURFACE_BUFFERS),)
+     LOCAL_CFLAGS += -DNUM_FRAMEBUFFER_SURFACE_BUFFERS=$(NUM_FRAMEBUFFER_SURFACE_BUFFERS)
+ endif
+diff --git a/services/surfaceflinger/DisplayDevice.cpp b/services/surfaceflinger/DisplayDevice.cpp
+index f597b73..21fe644 100644
+--- a/services/surfaceflinger/DisplayDevice.cpp
++++ b/services/surfaceflinger/DisplayDevice.cpp
+@@ -29,6 +29,10 @@
+ 
+ #include <gui/Surface.h>
+ 
++#ifdef EGL_NEEDS_FNW
++#include <ui/FramebufferNativeWindow.h>
++#endif
++
+ #include <hardware/gralloc.h>
+ 
+ #include "DisplayHardware/DisplaySurface.h"
+@@ -90,7 +94,11 @@ DisplayDevice::DisplayDevice(
+ {
+     Surface* surface;
+     mNativeWindow = surface = new Surface(producer, false);
++#ifndef EGL_NEEDS_FNW
+     ANativeWindow* const window = mNativeWindow.get();
++#else
++    ANativeWindow* const window = new FramebufferNativeWindow();
++#endif
+     char property[PROPERTY_VALUE_MAX];
+ 
+     /*
+-- 
+1.9.1

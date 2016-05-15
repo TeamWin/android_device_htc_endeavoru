@@ -80,10 +80,14 @@ COMMON_GLOBAL_CFLAGS             += -DUSES_TI_MAC80211
 TARGET_KERNEL_SOURCE := kernel/htc/endeavoru
 TARGET_KERNEL_CONFIG := cyanogenmod_endeavoru_defconfig
 
+# Art Tuning 
+ART_BUILD_TARGET_DEBUG := false
+ART_USE_OPTIMIZING_COMPILER := true
 
 # Marshmallow
 TARGET_NEEDS_TEXT_RELOCS_SUPPORT := true
 COMMON_GLOBAL_CFLAGS += -DDISABLE_ASHMEM_TRACKING
+TARGET_REQUIRES_SYNCHRONOUS_SETSURFACE := true
 
 # Enable Minikin text layout engine (will be the default soon)
 USE_MINIKIN := true

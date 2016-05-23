@@ -72,4 +72,4 @@ LOCAL_SHARED_LIBRARIES := liblog libcutils libutils libnvos
 LOCAL_SRC_FILES := libdgv1.c
 LOCAL_MODULE := libdgv1
 LOCAL_MODULE_TAGS := optional
-include $(BUILD_SHARED_LIBRARY
+include $(BUILD_SHARED_LIBRARY)

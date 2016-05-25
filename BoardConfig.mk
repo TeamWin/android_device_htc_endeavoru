@@ -78,7 +78,7 @@ COMMON_GLOBAL_CFLAGS             += -DUSES_TI_MAC80211
 
 # Kernel
 TARGET_KERNEL_SOURCE := kernel/htc/endeavoru
-TARGET_KERNEL_CONFIG := kernel/htc/endeavoru/arch/arm/configs/cyanogenmod_device-name_deconfig
+TARGET_KERNEL_CONFIG := cyanogenmod_endeavoru_defconfig
 # Art Tuning 
 ART_BUILD_TARGET_DEBUG := false
 ART_USE_OPTIMIZING_COMPILER := true

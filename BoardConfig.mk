@@ -141,7 +141,7 @@ TARGET_RECOVERY_FSTAB := device/htc/endeavoru/recovery/root/twrp.fstab
 TARGET_RECOVERY_DEVICE_MODULES += chargeled
 
 ifeq ($(TARGET_BUILD_VARIANT), eng)
-    BOARD_CUSTOM_BOOTIMG_MK := $(LOCAL_PATH)/customrecoveryimg.mk
+    BOARD_CUSTOM_BOOTIMG_MK := $(LOCAL_PATH)/customrecoveryimage.mk
 endif
 
 #TWRP CONFIG:

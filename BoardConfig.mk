@@ -140,6 +140,10 @@ BOARD_HAS_LARGE_FILESYSTEM := true
 TARGET_RECOVERY_FSTAB := device/htc/endeavoru/recovery/root/twrp.fstab
 TARGET_RECOVERY_DEVICE_MODULES += chargeled
 
+ifeq ($(TARGET_BUILD_VARIANT), eng)
+    BOARD_CUSTOM_BOOTIMG_MK := $(LOCAL_PATH)/customrecoveryimg.mk
+endif
+
 #TWRP CONFIG:
 #DEVICE_RESOLUTION to be eliminated: https://github.com/TeamWin/Team-Win-Recovery-Project/commit/591b920
 DEVICE_RESOLUTION := 720x1280

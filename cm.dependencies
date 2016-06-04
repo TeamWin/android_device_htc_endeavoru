@@ -3,10 +3,7 @@
    "repository": "android_device_htc_tegra3-common",
    "target_path": "device/htc/tegra3-common"
  },
- {
-   "repository": "android_kernel_htc_endeavoru",
-   "target_path": "kernel/htc/endeavoru"
- },
+ 
    {
     "remote": "github",
     "repository": "CyanogenMod/android_external_stlport",

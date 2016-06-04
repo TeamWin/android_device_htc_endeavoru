@@ -1,4 +1,4 @@
-# Copyright 2010 The Android Open Source Project
+]# Copyright 2010 The Android Open Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -77,8 +77,9 @@ WIFI_FIRMWARE_LOADER             := ""
 COMMON_GLOBAL_CFLAGS             += -DUSES_TI_MAC80211
 
 # Kernel
-TARGET_KERNEL_SOURCE := kernel/htc/endeavoru
-TARGET_KERNEL_CONFIG := cyanogenmod_endeavoru_defconfig
+#TARGET_KERNEL_SOURCE := kernel/htc/endeavoru
+#TARGET_KERNEL_CONFIG := cyanogenmod_endeavoru_defconfig
+TARGET_PREBUILT_KERNEL := device/htc/endeavoru-kernel/zImage
 # Art Tuning 
 ART_BUILD_TARGET_DEBUG := false
 ART_USE_OPTIMIZING_COMPILER := true
@@ -86,7 +87,7 @@ ART_USE_OPTIMIZING_COMPILER := true
 # Marshmallow
 TARGET_NEEDS_TEXT_RELOCS_SUPPORT := true
 COMMON_GLOBAL_CFLAGS += -DDISABLE_ASHMEM_TRACKING
-TARGET_REQUIRES_SYNCHRONOUS_SETSURFACE := true
+TARGET_REQUIRES_SYNCHRONOUS_- := true
 
 # Enable Minikin text layout engine (will be the default soon)
 USE_MINIKIN := true
@@ -133,10 +134,11 @@ TARGET_USERIMAGES_USE_EXT4 := true
 BOARD_USE_CUSTOM_RECOVERY_FONT := \"roboto_15x24.h\"
 BOARD_HAS_NO_SELECT_BUTTON := true
 BOARD_RECOVERY_SWIPE := true
-#ECOVERY_FSTAB := device/htc/endeavoru/ramdisk/fstab.endeavoru
-TARGET_RECOVERY_FSTAB := device/htc/endeavoru/recovery/root/twrp.fstab
+#TARGET_RECOVERY_FSTAB := device/htc/endeavoru/ramdisk/fstab.endeavoru
 RECOVERY_FSTAB_VERSION := 2
 BOARD_HAS_LARGE_FILESYSTEM := true
+TARGET_RECOVERY_FSTAB := device/htc/endeavoru/recovery/root/twrp.fstab
+TARGET_RECOVERY_DEVICE_MODULES += chargeled
 
 #TWRP CONFIG:
 #DEVICE_RESOLUTION to be eliminated: https://github.com/TeamWin/Team-Win-Recovery-Project/commit/591b920
@@ -157,9 +159,7 @@ RECOVERY_GRAPHICS_USE_LINELENGTH := true
 HAVE_SELINUX := true
 TWHAVE_SELINUX := true
 
-TARGET_RECOVERY_DEVICE_MODULES += chargeled
 
 # Releasetools
 TARGET_RELEASETOOLS_EXTENSIONS := device/htc/endeavoru
  BOARD_SEPOLICY_DIRS += device/htc/endeavoru/sepolicy
-    

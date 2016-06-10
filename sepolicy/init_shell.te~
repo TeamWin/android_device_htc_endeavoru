@@ -2,7 +2,7 @@
 
 # Needed by the wifi-calibration.sh script.
 
-allow init self:capability sys_module;
+allow qti_nit_shell self:capability sys_module;
 
 
 allow init sysfs:file write;

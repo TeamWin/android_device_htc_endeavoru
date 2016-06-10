@@ -1,4 +1,4 @@
-]# Copyright 2010 The Android Open Source Project
+# Copyright 2010 The Android Open Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -24,7 +24,7 @@
 -include device/htc/tegra3-common/BoardConfigCommon.mk
 
 # Boot/Recovery image settings
-BOARD_KERNEL_CMDLINE := androidboot.selinux=permissive
+BOARD_KERNEL_CMDLINE := 
 BOARD_KERNEL_PAGESIZE := 2048
 
 TARGET_USERIMAGES_USE_EXT4 := true
@@ -141,7 +141,7 @@ TARGET_RECOVERY_FSTAB := device/htc/endeavoru/recovery/root/twrp.fstab
 TARGET_RECOVERY_DEVICE_MODULES += chargeled
 
 ifeq ($(TARGET_BUILD_VARIANT), eng)
-    BOARD_CUSTOM_BOOTIMG_MK := $(LOCAL_PATH)/customrecoveryimage.mk
+    BOARD_CUSTOM_BOOTIMG_MK := device/htc/endeavoru/customrecoveryimage.mk
 endif
 
 #TWRP CONFIG:

@@ -1,0 +1,86 @@
+From cc24fe5cb87b8aa7509c752bc56387648156a2ae Mon Sep 17 00:00:00 2001
+From: alfsamsung <alfsamsung@hotmail.com>
+Date: Wed, 31 Dec 2014 19:48:03 +0100
+Subject: [PATCH] libgui: Addb back getDisplayInfo for old MR0_CAMERA_BLOB
+
+Signed-off-by: alfsamsung <alfsamsung@hotmail.com>
+---
+ include/gui/SurfaceComposerClient.h |  7 +++++++
+ libs/gui/SurfaceComposerClient.cpp  | 35 +++++++++++++++++++++++++++++++++++
+ 2 files changed, 42 insertions(+)
+
+diff --git a/include/gui/SurfaceComposerClient.h b/include/gui/SurfaceComposerClient.h
+index 9ec3f23..36a18df 100644
+--- a/include/gui/SurfaceComposerClient.h
++++ b/include/gui/SurfaceComposerClient.h
+@@ -85,6 +85,13 @@ public:
+     /* Triggers screen on/off or low power mode and waits for it to complete */
+     static void setDisplayPowerMode(const sp<IBinder>& display, int mode);
+ 
++#if defined(ICS_CAMERA_BLOB) || defined(MR0_CAMERA_BLOB)
++    static status_t getDisplayInfo(int32_t displayId, DisplayInfo* info);
++    static ssize_t getDisplayWidth(int32_t displayId);
++    static ssize_t getDisplayHeight(int32_t displayId);
++    static ssize_t getDisplayOrientation(int32_t displayId);
++#endif
++
+     // ------------------------------------------------------------------------
+     // surface creation / destruction
+ 
+diff --git a/libs/gui/SurfaceComposerClient.cpp b/libs/gui/SurfaceComposerClient.cpp
+index 82bdd6b..a0cbf65 100644
+--- a/libs/gui/SurfaceComposerClient.cpp
++++ b/libs/gui/SurfaceComposerClient.cpp
+@@ -486,6 +486,15 @@ void Composer::setDisplaySize(const sp<IBinder>& token, uint32_t width, uint32_t
+     s.what |= DisplayState::eDisplaySizeChanged;
+ }
+ 
++status_t Composer::setOrientation(int orientation) {
++    sp<ISurfaceComposer> sm(ComposerService::getComposerService());
++    sp<IBinder> token(sm->getBuiltInDisplay(ISurfaceComposer::eDisplayIdMain));
++    DisplayState& s(getDisplayStateLocked(token));
++    s.orientation = static_cast<uint32_t>(orientation);
++    mForceSynchronous = true; // TODO: do we actually still need this?
++    return NO_ERROR;
++}
++
+ // ---------------------------------------------------------------------------
+ 
+ SurfaceComposerClient::SurfaceComposerClient()
+@@ -749,6 +758,32 @@ status_t SurfaceComposerClient::getAnimationFrameStats(FrameStats* outStats) {
+     return ComposerService::getComposerService()->getAnimationFrameStats(outStats);
+ }
+ 
++#if defined(ICS_CAMERA_BLOB) || defined(MR0_CAMERA_BLOB)
++status_t SurfaceComposerClient::getDisplayInfo(
++        int32_t displayId, DisplayInfo* info)
++{
++    return getDisplayInfo(getBuiltInDisplay(displayId), info);
++}
++
++ssize_t SurfaceComposerClient::getDisplayWidth(int32_t displayId) {
++    DisplayInfo info;
++    getDisplayInfo(getBuiltInDisplay(displayId), &info);
++    return static_cast<int32_t>(info.w);
++}
++
++ssize_t SurfaceComposerClient::getDisplayHeight(int32_t displayId) {
++    DisplayInfo info;
++    getDisplayInfo(getBuiltInDisplay(displayId), &info);
++    return static_cast<int32_t>(info.h);
++}
++
++ssize_t SurfaceComposerClient::getDisplayOrientation(int32_t displayId) {
++    DisplayInfo info;
++    getDisplayInfo(getBuiltInDisplay(displayId), &info);
++    return info.orientation;
++}
++#endif
++
+ // ----------------------------------------------------------------------------
+ 
+ #ifndef FORCE_SCREENSHOT_CPU_PATH
+-- 
+1.9.1
+
+

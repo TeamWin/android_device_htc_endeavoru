@@ -1,0 +1,97 @@
+From 191e9006333bc740984961bf23ee7eb21cb51e7e Mon Sep 17 00:00:00 2001
+From: alfsamsung <alfsamsung@hotmail.com>
+Date: Sun, 28 Dec 2014 21:44:51 +0100
+Subject: [PATCH] libgui: Add back BOARD_EGL_SKIP_FIRST_DEQUEUE
+
+Signed-off-by: alfsamsung <alfsamsung@hotmail.com>
+---
+ include/gui/Surface.h |  3 +++
+ libs/gui/Android.mk   |  5 ++++-
+ libs/gui/Surface.cpp  | 23 ++++++++++++++++++-----
+ 3 files changed, 25 insertions(+), 6 deletions(-)
+
+diff --git a/include/gui/Surface.h b/include/gui/Surface.h
+index 72f1067..62bdc19 100644
+--- a/include/gui/Surface.h
++++ b/include/gui/Surface.h
+@@ -317,6 +317,9 @@ private:
+     // Stores the current generation number. See setGenerationNumber and
+     // IGraphicBufferProducer::setGenerationNumber for more information.
+     uint32_t mGenerationNumber;
++#ifdef SURFACE_SKIP_FIRST_DEQUEUE
++    bool                        mDequeuedOnce;
++#endif
+ };
+ 
+ }; // namespace android
+diff --git a/libs/gui/Android.mk b/libs/gui/Android.mk
+index 76aec6e..41beb7f 100644
+--- a/libs/gui/Android.mk
++++ b/libs/gui/Android.mk
+@@ -81,9 +81,12 @@ LOCAL_SHARED_LIBRARIES := \
+ 	libutils \
+ 	liblog
+ 
+-
+ LOCAL_MODULE := libgui
+ 
++ifeq ($(BOARD_EGL_SKIP_FIRST_DEQUEUE),true)
++    LOCAL_CFLAGS += -DSURFACE_SKIP_FIRST_DEQUEUE
++endif
++
+ ifeq ($(TARGET_BOARD_PLATFORM), tegra)
+ 	LOCAL_CFLAGS += -DDONT_USE_FENCE_SYNC
+ endif
+diff --git a/libs/gui/Surface.cpp b/libs/gui/Surface.cpp
+index 1abb6c3..cd188f4 100644
+--- a/libs/gui/Surface.cpp
++++ b/libs/gui/Surface.cpp
+@@ -80,6 +80,9 @@ Surface::Surface(
+     mConnectedToCpu = false;
+     mProducerControlledByApp = controlledByApp;
+     mSwapIntervalZero = false;
++#ifdef SURFACE_SKIP_FIRST_DEQUEUE
++    mDequeuedOnce = false;
++#endif
+ }
+ 
+ Surface::~Surface() {
+@@ -270,6 +273,9 @@ int Surface::dequeueBuffer(android_native_buffer_t** buffer, int* fenceFd) {
+     }
+ 
+     *buffer = gbuf.get();
++#ifdef SURFACE_SKIP_FIRST_DEQUEUE
++    if (!mDequeuedOnce) mDequeuedOnce = true;
++#endif
+     return OK;
+ }
+ 
+@@ -441,12 +447,19 @@ int Surface::query(int what, int* value) const {
+                 }
+                 break;
+             case NATIVE_WINDOW_QUEUES_TO_WINDOW_COMPOSER: {
+-                sp<ISurfaceComposer> composer(
+-                        ComposerService::getComposerService());
+-                if (composer->authenticateSurfaceTexture(mGraphicBufferProducer)) {
+-                    *value = 1;
+-                } else {
++#ifdef SURFACE_SKIP_FIRST_DEQUEUE
++                if (!mDequeuedOnce) {
+                     *value = 0;
++                } else
++#endif
++                {
++                    sp<ISurfaceComposer> composer(
++                            ComposerService::getComposerService());
++                    if (composer->authenticateSurfaceTexture(mGraphicBufferProducer)) {
++                        *value = 1;
++                    } else {
++                        *value = 0;
++                    }
+                 }
+                 return NO_ERROR;
+             }
+-- 
+1.9.1
+
+

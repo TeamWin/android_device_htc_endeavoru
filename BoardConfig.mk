@@ -78,7 +78,7 @@ COMMON_GLOBAL_CFLAGS             += -DUSES_TI_MAC80211
 
 # Kernel
 TARGET_KERNEL_SOURCE := kernel/htc/endeavoru
-TARGET_KERNEL_CONFIG := cyanogenmod_endeavoru_defconfig
+TARGET_KERNEL_CONFIG := twrp_endeavoru_defconfig
 #TARGET_PREBUILT_KERNEL := device/htc/endeavoru-kernel/zImage
 # Art Tuning 
 ART_BUILD_TARGET_DEBUG := false
@@ -163,15 +163,13 @@ TARGET_USERIMAGES_USE_EXT4 := true
 BOARD_USE_CUSTOM_RECOVERY_FONT := \"roboto_15x24.h\"
 BOARD_HAS_NO_SELECT_BUTTON := true
 BOARD_RECOVERY_SWIPE := true
-#TARGET_RECOVERY_FSTAB := device/htc/endeavoru/ramdisk/fstab.endeavoru
-#RECOVERY_FSTAB_VERSION := 2
+TARGET_RECOVERY_FSTAB := device/htc/endeavoru/ramdisk/fstab.endeavoru
+RECOVERY_FSTAB_VERSION := 2
 BOARD_HAS_LARGE_FILESYSTEM := true
-TARGET_RECOVERY_FSTAB := device/htc/endeavoru/recovery/root/twrp.fstab
+#TARGET_RECOVERY_FSTAB := device/htc/endeavoru/recovery/root/twrp.fstab
 TARGET_RECOVERY_DEVICE_MODULES += chargeled
 
-ifeq ($(TARGET_BUILD_VARIANT), eng)
-    BOARD_CUSTOM_BOOTIMG_MK := device/htc/endeavoru/customrecoveryimage.mk
-endif
+
 
 #TWRP CONFIG:
 #DEVICE_RESOLUTION to be eliminated: https://github.com/TeamWin/Team-Win-Recovery-Project/commit/591b920

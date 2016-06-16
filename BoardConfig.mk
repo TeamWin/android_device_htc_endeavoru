@@ -163,10 +163,10 @@ TARGET_USERIMAGES_USE_EXT4 := true
 BOARD_USE_CUSTOM_RECOVERY_FONT := \"roboto_15x24.h\"
 BOARD_HAS_NO_SELECT_BUTTON := true
 BOARD_RECOVERY_SWIPE := true
-TARGET_RECOVERY_FSTAB := device/htc/endeavoru/ramdisk/fstab.endeavoru
-RECOVERY_FSTAB_VERSION := 2
+#TARGET_RECOVERY_FSTAB := device/htc/endeavoru/ramdisk/twrp.fstab 
+#RECOVERY_FSTAB_VERSION := 2
 BOARD_HAS_LARGE_FILESYSTEM := true
-#TARGET_RECOVERY_FSTAB := device/htc/endeavoru/recovery/root/twrp.fstab
+TARGET_RECOVERY_FSTAB := device/htc/endeavoru/recovery/root/twrp.fstab
 TARGET_RECOVERY_DEVICE_MODULES += chargeled
 
 

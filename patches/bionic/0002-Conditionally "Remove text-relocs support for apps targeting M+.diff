@@ -1,0 +1,48 @@
+From 645cb3462fafd7dade496e8426639a5bc8dd7661 Mon Sep 17 00:00:00 2001
+From: Iftekhar Rifat <rifat662@gmail.com>
+Date: Thu, 12 Nov 2015 16:01:00 +0600
+Subject: [PATCH] Conditionally "Remove text-relocs support for apps targeting M+"
+
+This reverts commit 3e6f7807541bab8157f9c26e55829fd193683349
+
+Set TARGET_NEEDS_TEXT_RELOCS_SUPPORT := true in BoardConfig for
+devices which need it.
+
+Change-Id: Ib20c8f9cf63f815536d03180f3f9c251bf444368
+---
+
+diff --git a/linker/Android.mk b/linker/Android.mk
+index 7a9b5d9..1a6fbfe 100644
+--- a/linker/Android.mk
++++ b/linker/Android.mk
+@@ -52,6 +52,10 @@
+ # We need to access Bionic private headers in the linker.
+ LOCAL_CFLAGS += -I$(LOCAL_PATH)/../libc/
+ 
++ifeq ($(TARGET_NEEDS_TEXT_RELOCS_SUPPORT),true)
++LOCAL_CFLAGS += -DENABLE_TEXT_RELOCS_SUPPORT
++endif
++
+ # we don't want crtbegin.o (because we have begin.o), so unset it
+ # just for this module
+ LOCAL_NO_CRT := true
+diff --git a/linker/linker.cpp b/linker/linker.cpp
+index 146937a..ed908ff 100644
+--- a/linker/linker.cpp
++++ b/linker/linker.cpp
+@@ -2992,6 +2992,7 @@
+ 
+ #if !defined(__LP64__)
+   if (has_text_relocations) {
++#ifndef ENABLE_TEXT_RELOCS_SUPPORT
+     // Fail if app is targeting sdk version > 22
+     // TODO (dimitry): remove != __ANDROID_API__ check once http://b/20020312 is fixed
+     if (get_application_target_sdk_version() != __ANDROID_API__
+@@ -2999,6 +3000,7 @@
+       DL_ERR("%s: has text relocations", get_realpath());
+       return false;
+     }
++#endif
+     // Make segments writable to allow text relocations to work properly. We will later call
+     // phdr_table_protect_segments() after all of them are applied and all constructors are run.
+     DL_WARN("%s has text relocations. This is wasting memory and prevents "

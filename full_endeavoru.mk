@@ -39,8 +39,5 @@ PRODUCT_PACKAGES += \
     libGLESv2_tegra \
     libboringssl-compat
 
-#Help Twrp work
-PRODUCT_COPY_FILES += device/htc/endeavoru/twrp.fstab:recovery/root/etc/twrp.fstab
-
 # Libstlport needed by lib/libnvcap.so
 PRODUCT_PACKAGES += libstlport

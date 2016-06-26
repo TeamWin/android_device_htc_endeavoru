@@ -17,11 +17,17 @@
 import init.endeavoru.usb.rc
 import init.tegra3-common.rc
 
+on early-init
+   setenforce 0
+export LD_SHIM_LIBS /vendor/lib/hw/hwcomposer.tegra_v0.so|libkaicompat.so:/vendor/lib/hw/camera.tegra.so|libkaicompat.so:/vendor/lib/hw/audio_policy.vendor.tegra.so|libkaicompat.so:/system/lib/libnvcap_video.so|libkaicompat.so:/system/lib/libnvwinsys.so|libkaicompat.so:/vendor/lib/libwvm.so|libkaicompat.so:/system/lib/hw/sensors.tegra.so|libkaicompat.so
+
+
 on init
 
     # Our old /data partition
     mkdir /xtradata
 
+     export LD_SHIM_LIBS /vendor/lib/hw/hwcomposer.tegra_v0.so|libkaicompat.so:/vendor/lib/hw/camera.tegra.so|libkaicompat.so:/vendor/lib/hw/audio_policy.vendor.tegra.so|libkaicompat.so:/system/lib/libnvcap_video.so|libkaicompat.so:/system/lib/libnvwinsys.so|libkaicompat.so:/vendor/lib/libwvm.so|libkaicompat.so:/system/lib/hw/sensors.tegra.so|libkaicompat.so
 on fs
     mount_all /fstab.endeavoru
 

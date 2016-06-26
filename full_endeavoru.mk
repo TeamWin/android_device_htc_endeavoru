@@ -37,7 +37,8 @@ PRODUCT_PACKAGES += \
     libEGL_tegra_impl \
     libGLESv1_CM_tegra \
     libGLESv2_tegra \
-    libboringssl-compat
+    libboringssl-compat\
+    libkaicompat 
 
 # Libstlport needed by lib/libnvcap.so
 PRODUCT_PACKAGES += libstlport

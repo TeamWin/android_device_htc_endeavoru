@@ -66,3 +66,5 @@ ro.build.endeavoru.newlayout=1
 
 # Enable USB OTG (CAF commit to Settings)
 persist.sys.isUsbOtgEnabled=true
+
+ro.hardware=endeavoru

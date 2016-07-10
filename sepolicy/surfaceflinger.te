@@ -3,3 +3,6 @@ allow surfaceflinger { sysfs_devices_system_cpu sysfs_devices_tegradc }:file rw_
 allow surfaceflinger sysfs_devices_tegradc:dir r_dir_perms;
 allow surfaceflinger sysfs_devices_tegradc:lnk_file { open getattr read };
 allow surfaceflinger sysfs_devices_system_cpu:dir w_dir_perms;
+
+#kernel bug 
+allow surfaceflinger sysfs:file write

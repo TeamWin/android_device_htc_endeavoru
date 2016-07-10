@@ -68,4 +68,3 @@ allow load_bt self:capability sys_module;
 allow load_bt tun_device:chr_file create_file_perms;
 allow load_bt device:dir { add_name write};
 allow load_bt device:lnk_file { create read unlink };
-

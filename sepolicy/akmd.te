@@ -12,6 +12,3 @@ allow akmd akmd_data_file:file create_file_perms;
 
 # Permission needed to create files in /data/misc/
 #allow akmd system_data_file:dir w_dir_perms;
-
-
-

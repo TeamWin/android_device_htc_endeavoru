@@ -87,13 +87,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     wifi.interface=wlan0 \
 #$(call inherit-product, vendor/htc/endeavoru/endeavoru-vendor.mk)
 
-# Prebuilt kernel
-ifeq ($(TARGET_PREBUILT_KERNEL),)
-LOCAL_KERNEL := device/htc/endeavoru-kernel/zImage
-else
-LOCAL_KERNEL :$(TARGET_PREBUILT_KERNEL)
-endif
-
 PRODUCT_COPY_FILES := \
 $(LOCAL_KERNEL):kernel
 # common tegra3-HOX+ configs

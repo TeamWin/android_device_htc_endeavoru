@@ -9,5 +9,12 @@
     "repository": "CyanogenMod/android_external_stlport",
     "target_path": "external/stlport",
     "revision": "cm-13.0"
-  }
+  },
+  {
+    "remote": "github",
+    "repository": "android_hardware_ti_wlan" ,
+    "target_path": "hardware/ti/wlan",
+    "revision": "cm-13.0"
+    }
+  
 ]

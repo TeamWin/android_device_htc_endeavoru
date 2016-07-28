@@ -56,7 +56,7 @@ PRODUCT_PACKAGES += \
     librs_jni
 
 # Bluetooth tools
-$(call inherit-product, device/htc/endeavoru/hardware/ti/wpan/ti-wpan-products.mk)
+#$(call inherit-product, device/htc/endeavoru/hardware/ti/wpan/ti-wpan-products.mk)
 PRODUCT_COPY_FILES += $(LOCAL_PATH)/prebuilt/bin/load-bt.sh:system/bin/load-bt.sh
 PRODUCT_PACKAGES += \
     l2ping \
@@ -70,7 +70,7 @@ PRODUCT_PACKAGES += \
     tinycap
 
 # Wi-Fi
-$(call inherit-product, device/htc/endeavoru/hardware/ti/wlan/mac80211/wl128x-wlan-products.mk)
+#$(call inherit-product, device/htc/endeavoru/hardware/ti/wlan/mac80211/wl128x-wlan-products.mk)
 PRODUCT_COPY_FILES +=
 PRODUCT_COPY_FILES += \
      $(LOCAL_PATH)/prebuilt/bin/wifi_calibration.sh:system/bin/wifi_calibration.sh \
@@ -85,7 +85,7 @@ PRODUCT_PACKAGES += \
     wlconf
 PRODUCT_PROPERTY_OVERRIDES += \
     wifi.interface=wlan0 \
-$(call inherit-product, vendor/htc/endeavoru/endeavoru-vendor.mk)
+#$(call inherit-product, vendor/htc/endeavoru/endeavoru-vendor.mk)
 
 # Prebuilt kernel
 ifeq ($(TARGET_PREBUILT_KERNEL),)

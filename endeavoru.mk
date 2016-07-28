@@ -87,7 +87,5 @@ PRODUCT_PROPERTY_OVERRIDES += \
     wifi.interface=wlan0 \
 #$(call inherit-product, vendor/htc/endeavoru/endeavoru-vendor.mk)
 
-PRODUCT_COPY_FILES := \
-$(LOCAL_KERNEL):kernel
 # common tegra3-HOX+ configs
 $(call inherit-product, device/htc/tegra3-common/tegra3.mk)

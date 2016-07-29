@@ -40,7 +40,7 @@ PRODUCT_TAGS += dalvik.gc.type-precise
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/ramdisk/fstab.unknown:root/fstab.unknown \
     $(LOCAL_PATH)/ramdisk/init.unknown.rc:root/init.unknown.rc \
-    $(LOCAL_PATH)/ramdisk/init.unknown.usb.rc:root/init.endeavoru.usb.rc \
+    $(LOCAL_PATH)/ramdisk/init.unknown.usb.rc:root/init.unknown.usb.rc \
     $(LOCAL_PATH)/ramdisk/ueventd.unknown.rc:root/ueventd.unknown.rc
 
 # configs

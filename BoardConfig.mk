@@ -170,10 +170,9 @@ TARGET_RECOVERY_FSTAB := device/htc/endeavoru/recovery/root/fstab.unknown
 TARGET_RECOVERY_DEVICE_MODULES += chargeled
 
 BOARD_CUSTOM_BOOTIMG_MK := device/htc/endeavoru/recovery.mk
+
 #TWRP CONFIG:
-#DEVICE_RESOLUTION to be eliminated: https://github.com/TeamWin/Team-Win-Recovery-Project/commit/591b920
-DEVICE_RESOLUTION := 720x1280
-# new handling of resolution
+
 TW_THEME := portrait_hdpi
 # this enables proper handling of /data/media on devices that have this folder for storage
 RECOVERY_SDCARD_ON_DATA := true

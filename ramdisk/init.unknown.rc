@@ -14,7 +14,7 @@
 # limitations under the License.
 #
 
-import init.endeavoru.usb.rc
+import init.unknown.usb.rc
 import init.tegra3-common.rc
 
 on early-init
